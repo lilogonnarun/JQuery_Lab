@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script type='text/javascript' src='http://rickharrison.github.io/validate.js/validate.js'></script>
+    <!-- Styles -->
+    <style>
+        #contact label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        #contact_submit {
+            padding-left: 100px;
+        }
+
+        #contact div {
+            margin-top: 1em;
+        }
+
+        .error {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .error_show {
+            color: red;
+            margin-left: 10px;
+        }
+
+        input.invalid {
+            border: 2px solid red;
+        }
+
+        input.valid {
+            border: 2px solid green;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            <!-- Password check -->
+            $('#password').on('input', function () {
+                var input = $(this).val();
+                if (input) {
+                    $(this).removeClass("invalid").addClass("valid");
+                } else {
+                    $(this).removeClass("valid").addClass("invalid");
+                }
+                if (/^[a-z]*$/.test(input) === false|| input.length < 8) {
+                    $(this).removeClass("valid").addClass("invalid");
+                    $('#mention5').removeClass("error").addClass("error_show");
+                }
+            });
+            <!--Rewrite Password check -->
+            var pw = $('#password').val();
+            $('#retype').on('input', function () {
+                var input = $(this).val();
+                if(input)
+                {
+                    if (input===pw) {
+                        $(this).removeClass("invalid").addClass("valid");
+                    }else
+                    {
+                        $(this).removeClass("valid").addClass("invalid");
+                        $('#mention6').removeClass("error").addClass("error_show");
+                    }
+
+                }
+                else{
+                    $(this).removeClass("valid").addClass("invalid");
+                    $('#mention6').removeClass("error").addClass("error_show");
+
+                }
+            });
+
+            <!--Name check-->
+            $('#first_name').on('input', function () {
+                var input = $(this);
+                var is_name = input.val();
+                if (is_name && /^[a-zA-Z]*$/.test(input) === false) {
+                    input.removeClass("valid").addClass("invalid");
+                    $('#mention1').removeClass("error").addClass("error_show");
+                } else {
+                    input.removeClass("invalid").addClass("valid");
+                }
+            });
+            $('#last_name').on('input', function () {
+                var input = $(this);
+                var is_name = input.val();
+                if (/^[a-zA-Z]*$/.test(input) === false) {
+                    input.removeClass("valid").addClass("invalid");
+                    $('#mention2').removeClass("error").addClass("error_show");
+                }
+            });
+
+            <!--Email must be an email -->
+            $('#email').on('input', function () {
+                $(".error").hide();
+                var hasError = false;
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var emailaddressVal = $(this).val();
+                if (emailaddressVal) {
+                    $(this).removeClass("invalid").addClass("valid");
+                } else {
+                    $(this).removeClass("valid").addClass("invalid");
+                }
+                var emailblockReg =
+                    /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)([\w-]+\.)+[\w-]{2,4})?$/;
+
+                if (emailaddressVal === '') {
+                    $('#mention4').removeClass("error").addClass("error_show");
+                    hasError = true;
+                    $(this).removeClass("valid").addClass("invalid");
+                } else if (!emailReg.test(emailaddressVal)) {
+                    $("#email").after('<span class="error_show">Enter a valid email address.</span>');
+                    hasError = true;
+                    $(this).removeClass("valid").addClass("invalid");
+                } else if (!emailblockReg.test(emailaddressVal)) {
+                    $("#email").after('<span class="error_show">No yahoo, gmail or hotmail emails.</span>');
+                    hasError = true
+                    $(this).removeClass("valid").addClass("invalid");
+                }
+
+                if (hasError === true) {
+                    return false;
+                }
+
+            });
+
+            $('#address').on('input', function () {
+                var input = $(this);
+                if (input) {
+                    input.removeClass("invalid").addClass("valid");
+                } else {
+                    input.removeClass("valid").addClass("invalid");
+                    $('#mention3').removeClass("error").addClass("error_show");
+                }
+            });
+
+
+            $('#phone').on('input', function () {
+                if ($(this).val()) {
+                    $('#mention7').removeClass("error").addClass("error_show");
+                }
+            });
+         })
+    </script>
+    <script>
+        var validator = new FormValidator('form', [{
+            name: 'first_name',
+            display: 'required',
+            rules: 'alpha'
+        }, {
+            name: 'email',
+            rules: 'valid_email'
+        }, {
+            name: 'password',
+            rules: 'required'
+        }, {
+            name: 'password_confirm',
+            display: 'password confirmation',
+            rules: 'required|matches[password]'
+        }, {
+            name: 'email',
+            rules: 'valid_email',
+            depends: function() {
+                return Math.random() > .5;
+            }
+        }, {
+            name: 'minlength',
+            display: 'min length',
+            rules: 'min_length[8]'
+        }], function(errors, event) {
+            if (errors.length > 0) {
+                // Show the errors
+            }
+        });
+    </script>
+</head>
+<body>
+<form id="contact" method="post" action="">
+    <div>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" required name="first_name">
+        <span class="error" id="mention1">Cannot have numbers or special characters</span>
+    </div>
+    <div>
+        <label for="last_name">Last Name(optional):</label>
+        <input type="text" id="last_name" name="last_name">
+        <span class="error" id="mention2">Cannot have numbers or special characters</span>
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" required name="address">
+        <span class="error" id="mention3">This field is required</span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required name="email">
+        <span class="error" id="mention4">A valid email address is required</span>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password"  required name="password">
+        <span class="error"
+              id="mention5">too short, should have at least one letter, digit and special character.</span>
+    </div>
+    <div>
+        <label for="retype">Retype Password:</label>
+        <input type="password" id="retype"  name="retype" required>
+        <span class="error" id="mention6">different from password, try AGAIN.</span>
+    </div>
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone"  name="phone" required>
+        <span class="error" id="mention7">This field is required</span>
+    </div>
+    <!-- Submit Button -->
+    <div id="contact_submit">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type='text/javascript' src='../jquery.min.js'></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script>
+        $.validator.setDefaults({
+            submitHandler: function() {
+                alert("提交事件!");
+            }
+        });
+        $().ready(function() {
+            $("#commentForm").validate();
+        });
+    </script>
+<script>
+    $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+        $("#signupForm").validate({
+            rules: {
+                firstname: {
+                    required:true,
+                    alpha:true
+                },
+                lastname: {
+                    alpha:true
+                },
+                password: {
+                    required: true,
+                    minlength: 9,
+                    password:true
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 9,
+                    equalTo: "#password"
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                address:
+                    {
+                        required:true,
+                        alpha_numeric:true
+                    },
+                phone:
+                    {
+                        required:true,
+                        phoneUS:true
+                    }
+            },
+            messages: {
+                firstname: "请输入您的名字",
+                lastname: "请输入您的姓氏",
+                password: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 5 个字母"
+                },
+                confirm_password: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 5 个字母",
+                    equalTo: "两次密码输入不一致"
+                },
+                email: "请输入一个正确的邮箱",
+                address:"请输入您的地址"
+            }
+        })
+    });
+     function check()
+     {
+         if($(this).validate()===true)
+         {
+             $(this).removeClass("invalid").addClass("valid");
+         }
+         else
+         {
+             $(this).removeClass("valid").addClass("invalid");
+             $(this).removeClass("error").addClass("error_show");
+         }
+     }
+</script>
+    <style>
+        #contact label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+
+        #contact_submit {
+            padding-left: 100px;
+        }
+
+        #contact div {
+            margin-top: 1em;
+        }
+
+        .error {
+            display: none;
+            margin-left: 10px;
+        }
+
+        .error_show {
+            color: red;
+            margin-left: 10px;
+        }
+
+        input.invalid {
+            border: 2px solid red;
+        }
+
+        input.valid {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+<form class="cmxform" id="signupForm" method="get" action="">
+    <fieldset>
+        <legend>验证完整的表单</legend>
+        <p>
+            <label for="firstname">First Name</label>
+            <input id="firstname" name="firstname" type="text" onsubmit="check()">
+            <span class="error" id="mention1">Cannot have numbers or special characters</span>
+        </p>
+        <p>
+            <label for="lastname">Last Name</label>
+            <input id="lastname" name="lastname" type="text" onsubmit="check()">
+            <span class="error" id="mention2">Cannot have numbers or special characters</span>
+        </p>
+        <p>
+            <label for="address">Address</label>
+            <input id="address" name="address" type="text" onsubmit="check()">
+            <span class="error" id="mention3">This field is required</span>
+
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" onsubmit="check()">
+            <span class="error" id="mention4">A valid email address is required</span>
+
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" onsubmit="check()">
+            <span class="error"
+                  id="mention5">too short, should have at least one letter, digit and special character.</span>
+
+        </p>
+        <p>
+            <label for="confirm_password">Confirm password</label>
+            <input id="confirm_password" name="confirm_password" type="password" onsubmit="check()">
+            <span class="error" id="mention6">different from password, try AGAIN.</span>
+        </p>
+
+        <p>
+            <input class="submit" type="submit" value="提交">
+        </p>
+    </fieldset>
+</form>
+</body>
+</html>

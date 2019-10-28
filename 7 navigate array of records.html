@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+        $(function () {
+            var records1 = [
+                "1000",
+                "2000",
+                "3000",
+                "4000",
+                "5000",
+                "6000",
+                "7000",
+                "8000",
+                "9000",
+                "0000",
+            ];
+            $("#id").autocomplete({
+                source: records1
+            });
+            var records2 = [
+                "Jerry",
+                "Tom",
+                "Lindsey",
+                "Alex",
+                "Penny"
+            ];
+            $("#name").autocomplete({
+                source: records2
+            });
+            var records3 = [
+                "JerryRoad",
+                "TomRload",
+                "LindRoad",
+                "AlexRoad",
+                "PennyRoad"
+            ];
+            $("#address").autocomplete({
+                source: records3
+            });
+            var records4 = [
+                "0000000",
+                "1214423434",
+                "5353535",
+                "675675",
+                "86868665"
+            ];
+            $("#mobile").autocomplete({
+                source: records4
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="ui-widget">
+    <form>
+        <p>Employyees' form</p>
+        <label for="id">ID: </label>
+        <input id="id">
+        <br/> <br/>
+        <label for="name">name: </label>
+        <input id="name">
+        <br/> <br/>
+        <label for="address">address: </label>
+        <input id="address">
+        <br/> <br/>
+        <label for="mobile">mobile no:</label>
+        <input id="mobile">
+    </form>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #label
+        {
+            color:red;
+        }
+    </style>
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script>
+        var count=0;
+        function  discount() {
+            count++;
+            if(count==1)
+            {
+                $('label').html("your value");
+                $('div label').text("Congratulation User");
+            }
+            else if(count==3)
+            {
+               $('#label').text("Discount offer of 20% on all products");
+
+            }
+            else if(count==5)
+            {
+               $('#label').text("Hurray!!! Mega offer of 50% on all products");
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="mydiv">
+    <label id="label">
+        A button
+    </label>
+    <button onclick="discount()">View Offers</button>
+</div>
+</body>
+</html>

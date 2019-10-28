@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<script>
+    /*right account:
+    name:Lindsey
+    password:12345678
+     */
+    var count=0;
+    function checkAccount()
+    {
+        if($('.name').val()==='Lindsey'&&$('.password').val()==='12345678') {
+            location.replace('1 country flags.html');
+        }
+        else{
+                overThree();
+        }
+    }
+    function overThree()
+    {
+        count++;
+        if(count>=3)
+        {
+            alert("false input over three times, please wait!");
+            $('.name').val("error!");
+            $('.password').val("error!");
+            $('.password').prop('disabled', true);
+            $('.name').prop('disabled', true);
+        }
+    }
+</script>
+    <title>Sinloy COFFEE - Login</title>
+</head>
+<body>
+<!--mainbody-->
+<div class="container">
+    <div class="jumbotron">
+        <h1>Sinloy COFFEE</h1>
+        <p>Discover SPECIALTY COFFEE From The World</p>
+    </div>
+</div>
+<br><br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <p class="intro">Now login to join us!</p>
+            <form class="form1">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="name"  placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="password" placeholder="Password" name="userpass" />
+                </div>
+            </form>
+            <button type="button" class="btn btn-default btn-lg" onclick="checkAccount()">login NOW</button>
+            <br><br>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; CHENJIN's Website 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
+<!-- Bootstrap core JavaScript -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+</body>
+</html>
